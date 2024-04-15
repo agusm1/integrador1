@@ -1,6 +1,8 @@
 package com.example.integrador1.dao;
 
+import com.example.integrador1.dto.ClienteDTO;
 import com.example.integrador1.entity.Cliente;
+import com.example.integrador1.factory.FactoryMySQL;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,29 +42,29 @@ public class ClienteDAO {
             }
         }
     }
-    public List<Cliente> obtenerClientesOrdenadosPorFacturacion() {
+    public List<ClienteDTO> obtenerClientesOrdenadosPorFacturacion() {
+        List<ClienteDTO> clientesOrdenados = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        this.conn = FactoryMySQL.createConnection();
         String query = "SELECT c.*, SUM(fp.cantidad) as total_facturacion " +
                 "FROM Cliente c " +
                 "JOIN Factura f ON c.idCliente = f.idCliente " +
                 "JOIN FacturaProducto fp ON f.idFactura = fp.idFactura " +
                 "GROUP BY c.idCliente " +
-                "ORDER BY total_facturacion DESC" +
-                "LIMIT: 10";
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        List<Cliente> clientesOrdenados = new ArrayList<>();
-
+                "ORDER BY total_facturacion DESC " +
+                "LIMIT 10";
         try {
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                int idCliente = rs.getInt("idCliente");
+                Integer idCliente = rs.getInt("idCliente");
                 String nombre = rs.getString("nombre");
                 String email = rs.getString("email");
 
                 // Construir un objeto Cliente con los datos recuperados de la consulta
-                Cliente cliente = new Cliente(idCliente, nombre, email);
+                ClienteDTO cliente = new ClienteDTO(idCliente, nombre, email);
                 clientesOrdenados.add(cliente);
             }
         } catch (SQLException e) {
@@ -79,7 +81,6 @@ public class ClienteDAO {
                 e.printStackTrace();
             }
         }
-
         return clientesOrdenados;
     }
 }

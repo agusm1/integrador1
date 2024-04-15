@@ -3,16 +3,16 @@ package com.example.integrador1.dto;
 public class ClienteDTO {
 
     private Integer idCliente;
-    private String mombre;
+    private String nombre;
     private String email;
 
     public ClienteDTO() {
     }
 
-    public ClienteDTO(Integer idCliente, String email, String mombre) {
+    public ClienteDTO(Integer idCliente, String nombre, String email) {
         this.idCliente = idCliente;
         this.email = email;
-        this.mombre = mombre;
+        this.nombre = nombre;
     }
 
     public Integer getIdCliente() {
@@ -24,14 +24,14 @@ public class ClienteDTO {
     }
 
     public String getMombre() {
-        return mombre;
+        return nombre;
     }
 
     @Override
     public String toString() {
         return "ClienteDTO{" +
                 "idCliente=" + idCliente +
-                ", mombre='" + mombre + '\'' +
+                ", mombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }

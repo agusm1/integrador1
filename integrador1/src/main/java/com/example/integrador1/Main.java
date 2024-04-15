@@ -4,6 +4,7 @@ import com.example.integrador1.dao.ClienteDAO;
 import com.example.integrador1.dao.FacturaDAO;
 import com.example.integrador1.dao.FacturaProductoDAO;
 import com.example.integrador1.dao.ProductoDAO;
+import com.example.integrador1.dto.ClienteDTO;
 import com.example.integrador1.dto.ProductoDTO;
 import com.example.integrador1.entity.Cliente;
 import com.example.integrador1.utils.HelperMySQL;
@@ -24,8 +25,6 @@ public class Main {
         AbstractFactory chosenFactory = AbstractFactory.getDAOFactory(1);
         ClienteDAO cliente = chosenFactory.getClienteDAO();
         ProductoDAO producto = chosenFactory.getProductoDAO();
-        FacturaDAO factura = chosenFactory.getFacturaDAO();
-        FacturaProductoDAO facturaProducto = chosenFactory.getFacturaProductoDAO();
         System.out.println();
         System.out.println("////////////////////////////////////////////");
         System.out.println("////////////////////////////////////////////");
@@ -33,11 +32,11 @@ public class Main {
         System.out.println(producMasVendido);
         System.out.println("////////////////////////////////////////////");
         System.out.println("////////////////////////////////////////////");
-        List<Cliente> clientesxFacturacion = cliente.obtenerClientesOrdenadosPorFacturacion();
-        for (Cliente clienteOrdenado : clientesxFacturacion) {
+        List<ClienteDTO> clientesxFacturacion = cliente.obtenerClientesOrdenadosPorFacturacion();
+        for (ClienteDTO clienteOrdenado : clientesxFacturacion) {
             System.out.println(clienteOrdenado);
             System.out.println("////////////////////////////////////////////");
-        }
+        }//*/
 
     }
 

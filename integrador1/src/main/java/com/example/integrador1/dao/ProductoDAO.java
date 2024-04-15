@@ -53,7 +53,7 @@ public class ProductoDAO {
         while (rs.next()) {
             productoDTO = new ProductoDTO(rs.getInt(1), rs.getString(2), rs.getInt(3));
         }
-        this.conn.close();
+        //this.conn.close();
         return productoDTO;
     }
 }
